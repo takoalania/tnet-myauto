@@ -115,90 +115,84 @@ const ModelMultiSelect = ({
         <ChevronDown size={16} className="text-[#6F7383]" />
       </button>
 
-      {open &&
-        dropdownRoot &&
-        createPortal(
-          <div>
-            <div className="fixed inset-0 z-40" onClick={closeDropdown} />
-
+    {open && dropdownRoot &&
+      createPortal(
+        <div>
+          <div className="fixed inset-0 z-40" onClick={closeDropdown} />
+          <div
+            className="absolute z-50 bg-white border border-[#E2E5EB] rounded-[12px] shadow-md"
+            style={{
+              width: rect.width,
+              top: rect.bottom + window.scrollY + 4,
+              left: rect.left + window.scrollX,
+              maxHeight: "45vh",
+            }}
+          >
             <div
-              className="
-                fixed z-50 bg-white border border-[#E2E5EB]
-                rounded-[12px] shadow-md
-              "
-              style={{
-                width: rect.width,
-                left: rect.left,
-                top: rect.bottom + 4,
-                maxHeight: "45vh",
-              }}
+              className="px-4 pt-3 pb-2 space-y-3 overflow-y-auto"
+              style={{ maxHeight: "calc(45vh - 50px)" }}
             >
-              <div
-                className="px-4 pt-3 pb-2 space-y-3 overflow-y-auto"
-                style={{ maxHeight: "calc(45vh - 50px)" }}
-              >
-                {groups.map((group) => (
-                  <div key={group.manId}>
-                    <div className="text-[13px] font-semibold text-[#5A5A6E] mb-1">
-                      {group.manName}
-                    </div>
-
-                    {group.models.map((model) => {
-                      const encoded = `${group.manId}:${model.id}`;
-                      const checked = draft.includes(encoded);
-
-                      return (
-                        <button
-                          key={encoded}
-                          type="button"
-                          onClick={() => toggle(encoded)}
-                          className="
-                            flex items-center gap-3 w-full text-left
-                            px-1 py-1.5 rounded-[6px] hover:bg-[#F5F6FA]
-                          "
-                        >
-                          <span
-                            className={`
-                              flex items-center justify-center
-                              w-[18px] h-[18px] rounded-[4px] border
-                              ${
-                                checked
-                                  ? "bg-[#22C55E] border-[#22C55E]"
-                                  : "bg-white border-[#C2C9D8]"
-                              }
-                            `}
-                          >
-                            {checked && (
-                              <Check size={14} className="text-white" />
-                            )}
-                          </span>
-
-                          <span className="text-[13px] text-[#1B1D25]">
-                            {model.name}
-                          </span>
-                        </button>
-                      );
-                    })}
+              {groups.map((group) => (
+                <div key={group.manId}>
+                  <div className="text-[13px] font-semibold text-[#5A5A6E] mb-1">
+                    {group.manName}
                   </div>
-                ))}
-              </div>
 
-              <div className="px-4 pb-3 pt-1">
-                <button
-                  type="button"
-                  onClick={apply}
-                  className="
-                    w-full h-[36px] bg-[#111827]
-                    rounded-[8px] text-white text-[13px] font-medium
-                  "
-                >
-                  არჩევა
-                </button>
-              </div>
+                  {group.models.map((model) => {
+                    const encoded = `${group.manId}:${model.id}`;
+                    const checked = draft.includes(encoded);
+
+                    return (
+                      <button
+                        key={encoded}
+                        type="button"
+                        onClick={() => toggle(encoded)}
+                        className="
+                          flex items-center gap-3 w-full text-left
+                          px-1 py-1.5 rounded-[6px] hover:bg-[#F5F6FA]
+                        "
+                      >
+                        <span
+                          className={`
+                            flex items-center justify-center
+                            w-[18px] h-[18px] rounded-[4px] border
+                            ${
+                              checked
+                                ? "bg-[#22C55E] border-[#22C55E]"
+                                : "bg-white border-[#C2C9D8]"
+                            }
+                          `}
+                        >
+                          {checked && <Check size={14} className="text-white" />}
+                        </span>
+
+                        <span className="text-[13px] text-[#1B1D25]">
+                          {model.name}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              ))}
             </div>
-          </div>,
-          dropdownRoot
-        )}
+
+            <div className="px-4 pb-3 pt-1">
+              <button
+                type="button"
+                onClick={apply}
+                className="
+                  w-full h-[36px] bg-[#111827]
+                  rounded-[8px] text-white text-[13px] font-medium
+                "
+              >
+                არჩევა
+              </button>
+            </div>
+          </div>
+        </div>,
+        dropdownRoot
+      )
+    }
     </div>
   );
 };
