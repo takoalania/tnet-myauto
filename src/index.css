@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #F2F2F6;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto; 
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+      padding-left: 148px;
+      padding-right: 148px;
+    }
+  }
+}
+
+@layer utilities {
+  @media (min-width: 1280px) {
+    .search-content {
+      width: calc(100% - 320px);
+    }
+  }
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+.search-dot {
+  display: inline-block;
+  font-size: 14px;
+  animation: dotPulse 0.9s ease-in-out infinite;
+}
+
+.search-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.search-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.search-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
